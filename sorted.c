@@ -4,12 +4,10 @@
 */
 
 #include "set.h"
-#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include <stdbool.h>
-#include <stdio.h>
 
 static int search(SET *sp, char *elt, bool *found);
 
@@ -122,10 +120,12 @@ char **getElements(SET *sp) {
     return out;
 }
 
+/* Rounds the double to the closest integer
+   O(1)
+*/
 static int rounding (double x) {
 	return (int)(x*2) % 2 == 1 ? (int)x + 1 : (int)x;
 }
-
 
 /* Binary search over the set (stores whether it's in the set in found)
    Best: O(1)
