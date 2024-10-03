@@ -1,6 +1,6 @@
 /* Represents a sorted set and contains methods related to it
    Author: Itay Volk
-   Date: 10/2/2024
+   Date: 10/3/2024
 */
 
 #include "set.h"
