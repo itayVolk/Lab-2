@@ -1,28 +1,28 @@
 unique
 ------
                               unsorted  sorted
-GreenEggsAndHam.txt             0.004     ????
-Macbeth.txt                     0.035     ????
-Genesis.txt                     0.042     ????
-HoundOfTheBaskervilles.txt      0.121     ????
-TheWarOfTheWorlds.txt           0.156     ????
-TreasureIsland.txt              0.143     ????
-TheSecretGarden.txt             0.130     ????
-TwentyThousandLeagues.txt       0.301     ????
-TheCountOfMonteCristo.txt       1.541     ????
-Bible.txt                       1.674     ????
+GreenEggsAndHam.txt             0.007     0.006
+Macbeth.txt                     0.035     0.024
+Genesis.txt                     0.042     0.023
+HoundOfTheBaskervilles.txt      0.121     0.037
+TheWarOfTheWorlds.txt           0.156     0.041
+TreasureIsland.txt              0.143     0.041
+TheSecretGarden.txt             0.130     0.035
+TwentyThousandLeagues.txt       0.301     0.057
+TheCountOfMonteCristo.txt       1.541     0.205
+Bible.txt                       1.674     0.186
 
 
 parity
 ------
                               unsorted  sorted
-GreenEggsAndHam.txt             0.002     ????
-Macbeth.txt                     0.137     ????
-Genesis.txt                     0.174     ????
-HoundOfTheBaskervilles.txt      0.689     ????
-TheWarOfTheWorlds.txt           0.875     ????
-TreasureIsland.txt              0.851     ????
-TheSecretGarden.txt             0.774     ????
-TwentyThousandLeagues.txt       2.052     ????
-TheCountOfMonteCristo.txt       19.641     ????
-Bible.txt                       19.870     ????
+GreenEggsAndHam.txt             0.006      0.006
+Macbeth.txt                     0.137      0.040
+Genesis.txt                     0.174      0.042
+HoundOfTheBaskervilles.txt      0.689      0.128
+TheWarOfTheWorlds.txt           0.875      0.145
+TreasureIsland.txt              0.851      0.150
+TheSecretGarden.txt             0.774      0.149
+TwentyThousandLeagues.txt       2.052      0.299
+TheCountOfMonteCristo.txt       19.641     2.293
+Bible.txt                       19.870     2.270
