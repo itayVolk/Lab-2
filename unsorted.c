@@ -67,13 +67,11 @@ void removeElement(SET *sp, char *elt) {
     int i = search(sp, elt);
     if (i != -1) {
         free(sp->data[i]);
-        if (i < sp->n) {
-            i++;
-            for (; i < sp->n; i++) {
-                sp->data[i-1] = sp->data[i];
-            }
-            sp->n--;
+        i++;
+        for (; i < sp->n; i++) {
+            sp->data[i-1] = sp->data[i];
         }
+        sp->n--;
     }
 }
 
@@ -95,6 +93,7 @@ char **getElements(SET *sp) {
     char **out = calloc(sp->n, sizeof(char*));
     for (int i = 0; i < sp->n; i++) {
         out[i] = strdup(sp->data[i]);
+        assert(out[i] != NULL);
     }
     return out;
 }
@@ -105,6 +104,8 @@ char **getElements(SET *sp) {
    Worst: O(n)
 */
 static int search(SET *sp, char *elt) {
+    assert(sp != NULL);
+    assert(elt != NULL);
     for (int i = 0; i < sp->n; i++) {
         if (!strcmp(sp->data[i], elt)) {
             return i;

@@ -8,6 +8,7 @@
 #include <string.h>
 #include <assert.h>
 #include <stdbool.h>
+#include <time.h>
 
 static int search(SET *sp, char *elt, bool *found);
 
@@ -56,22 +57,17 @@ int numElements(SET *sp) {
 void addElement(SET *sp, char *elt) {
     assert(sp != NULL);
     assert(elt != NULL);
-    if (sp->n > 0) {
-    	bool found = false;
-    	int i = search(sp, elt, &found) + 1;
-    	if (!found) {
-        	sp->n++;
-		assert(sp->n < sp->count);
-        	for (int j = sp->n; j > i; j--) {
-        	    sp->data[j] = sp->data[j-1];
-        	}
-        	sp->data[i] = strdup(elt);
-	}
+    bool found = false;
+    int i =  search(sp, elt, &found) + 1;
+    if (!found) {
+        sp->n++;
+        assert(sp->n <= sp->count);
+        for (int j = sp->n; j > i; j--) {
+            sp->data[j] = sp->data[j-1];
+        }
+        sp->data[i] = strdup(elt);
+        assert(sp->data[i] != NULL);
     }
-    else {
-	sp->n++;
-    	sp->data[0] = strdup(elt);
-    }	
 }
 
 /* Removes the element and shifts every item after of it backwards
@@ -84,13 +80,11 @@ void removeElement(SET *sp, char *elt) {
     int i = search(sp, elt, &found);
     if (found) {
         free(sp->data[i]);
-        if (i < sp->n) {
-            i++;
-            for (; i < sp->n; i++) {
-                sp->data[i-1] = sp->data[i];
-            }
-            sp->n--;
+        i++;
+        for (; i < sp->n; i++) {
+            sp->data[i-1] = sp->data[i];
         }
+        sp->n--;
     }
 }
 
@@ -100,12 +94,9 @@ void removeElement(SET *sp, char *elt) {
 char *findElement(SET *sp, char *elt) {
     assert(sp != NULL);
     assert(elt != NULL);
-    if (sp->n > 0) {
-    	bool found = false;
-    	int i = search(sp, elt, &found);
-    	return found ? sp->data[i] : NULL;
-    }
-    return NULL;
+    bool found = false;
+    int i = search(sp, elt, &found);
+    return found ? sp->data[i] : NULL;
 }
 
 /* Returns an array containing a copy of the data in the set
@@ -114,17 +105,12 @@ char *findElement(SET *sp, char *elt) {
 char **getElements(SET *sp) {
     assert(sp != NULL);
     char **out = calloc(sp->n, sizeof(char*));
+    assert(out != NULL);
     for (int i = 0; i < sp->n; i++) {
         out[i] = strdup(sp->data[i]);
+        assert(out[i] != NULL);
     }
     return out;
-}
-
-/* Rounds the double to the closest integer
-   O(1)
-*/
-static int rounding (double x) {
-	return (int)(x*2) % 2 == 1 ? (int)x + 1 : (int)x;
 }
 
 /* Binary search over the set (stores whether it's in the set in found)
@@ -133,7 +119,12 @@ static int rounding (double x) {
    Worst: O(log n)
 */
 static int search(SET *sp, char *elt, bool *found) {
-    assert(sp->n > 0);
+    assert(sp != NULL);
+    assert(elt != NULL);
+    if (sp->n == 0) {
+        *found = false;
+        return -1;
+    }
     int lo = 0, mid, hi = sp->n-1;
     while (lo <= hi) {
 	mid = (lo+hi)/2;
